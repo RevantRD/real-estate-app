@@ -89,24 +89,36 @@ public with sharing class REAPP_PropertyController {
     // =====================================================
     // CREATE PROPERTY
     // =====================================================
-    
+
     @AuraEnabled
-    public static Id createPropertyWithImage(
-        Property__c propertyRecord,
-        List<Id> documentIds
-    ) {
+    public static Id createPropertyWithImage(Property__c propertyRecord, List<String> documentIds) {
 
-        // 🔥 HARD VALIDATION
-        if (documentIds == null || documentIds.isEmpty()) {
-            throw new AuraHandledException('At least one image is required');
-        }
+    // 1. Build full address
+    String fullAddress =
+        propertyRecord.Address__c + ' ' +
+        propertyRecord.City__c + ' ' +
+        propertyRecord.State__c + ' ' +
+        propertyRecord.Postal_Code__c + ' ' +
+        propertyRecord.Country__c;
 
-        insert propertyRecord;
+    // 2. Geocode
+    REAPP_OpenStreetGeoService.GeoResult geo =
+        REAPP_OpenStreetGeoService.geocode(fullAddress);
 
-        // Link files to record
+    // 3. Set location
+    if (geo != null) {
+        propertyRecord.Location__Latitude__s = geo.lat;
+        propertyRecord.Location__Longitude__s = geo.lng;
+    }
+
+    // 4. Insert property
+    insert propertyRecord;
+
+    // 5. Attach files (existing logic assumed)
+    if (documentIds != null && !documentIds.isEmpty()) {
         List<ContentDocumentLink> links = new List<ContentDocumentLink>();
 
-        for (Id docId : documentIds) {
+        for (String docId : documentIds) {
             links.add(new ContentDocumentLink(
                 ContentDocumentId = docId,
                 LinkedEntityId = propertyRecord.Id,
@@ -115,7 +127,8 @@ public with sharing class REAPP_PropertyController {
         }
 
         insert links;
-
-        return propertyRecord.Id;
     }
+
+    return propertyRecord.Id;
+}
 }

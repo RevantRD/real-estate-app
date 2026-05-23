@@ -1,13 +1,26 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <Package xmlns="http://soap.sforce.com/2006/04/metadata">
 	<types>
-		<members>REAPP_GeocodingService</members>
+		<members>REAPP_GeocodeQueueable</members>
+		<members>REAPP_LeaseAgreementController</members>
+		<members>REAPP_LeaseAgreementTriggerHandler</members>
+		<members>REAPP_LeaseAgreementTriggerHandlerTest</members>
+		<members>REAPP_OpenStreetGeoService</members>
 		<members>REAPP_PropertyController</members>
+		<members>REAPP_PropertyTriggerHandler</members>
 		<name>ApexClass</name>
+	</types>
+	<types>
+		<members>*</members>
+		<name>ApexTrigger</name>
 	</types>
 	<types>
 		<members>Real_Estate_Property_Management_System</members>
 		<name>CustomApplication</name>
+	</types>
+	<types>
+		<members>Org_Wide_Address_Label</members>
+		<name>CustomLabel</name>
 	</types>
 	<types>
 		<members>Lease_Agreement__c</members>
@@ -20,14 +33,34 @@
 	<types>
 		<members>Lease_Agreement__c</members>
 		<members>Maintenance_Request__c</members>
+		<members>Property_Management</members>
 		<members>Property__c</members>
 		<members>Tenant__c</members>
 		<members>Vendor__c</members>
 		<name>CustomTab</name>
 	</types>
 	<types>
+		<members>Lease_Agreement_Record_Page</members>
+		<members>Property</members>
+		<name>FlexiPage</name>
+	</types>
+	<types>
+		<members>Lease_Agreement__c-Lease Agreement Layout</members>
+		<members>Maintenance_Request__c-Maintenance Request Layout</members>
+		<members>Property__c-Property Layout</members>
+		<members>Tenant__c-Tenant Layout</members>
+		<members>Vendor__c-Vendor Layout</members>
+		<name>Layout</name>
+	</types>
+	<types>
+		<members>reappLeaseAgreementPdf</members>
 		<members>reappPropertyList</members>
+		<members>reappPropertyMapp</members>
 		<name>LightningComponentBundle</name>
+	</types>
+	<types>
+		<members>*</members>
+		<name>StaticResource</name>
 	</types>
 	<version>66.0</version>
 </Package>

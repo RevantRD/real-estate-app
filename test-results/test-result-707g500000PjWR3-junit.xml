@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites>
+    <testsuite name="force.apex" timestamp="2026-05-23T15:14:32.000Z" hostname="https://orgfarm-7539cf0a34-dev-ed.develop.my.salesforce.com" tests="7" failures="7"  errors="0"  time="0.00">
+        <properties>
+            <property name="outcome" value="Failed"/>
+            <property name="testsRan" value="7"/>
+            <property name="passing" value="0"/>
+            <property name="failing" value="7"/>
+            <property name="skipped" value="0"/>
+            <property name="passRate" value="0%"/>
+            <property name="failRate" value="100%"/>
+            <property name="testStartTime" value="Sat May 23 2026 20:44:32"/>
+            <property name="testSetupTimeInMs" value="547"/>
+            <property name="testExecutionTime" value="0.00 s"/>
+            <property name="testTotalTime" value="0.55 s"/>
+            <property name="commandTime" value="0.20 s"/>
+            <property name="hostname" value="https://orgfarm-7539cf0a34-dev-ed.develop.my.salesforce.com"/>
+            <property name="orgId" value="00Dg500000AvexREAR"/>
+            <property name="username" value="revantrevant16@rea.com"/>
+            <property name="testRunId" value="707g500000PjWR3"/>
+            <property name="userId" value="005g5000007FatZAAS"/>
+            <property name="coveredLines" value="0"/>
+            <property name="testRunCoverage" value="0%"/>
+            <property name="orgWideCoverage" value="0%"/>
+        </properties>
+        <testcase name="testBulkLeaseAgreementTaskCreation" classname="REAPP_LeaseAgreementTriggerHandlerTest" time="0.00">
+            <failure message="Methods defined as TestMethod do not support Web service callouts"></failure>
+        </testcase>
+        <testcase name="testLeaseAgreementWithoutProperty" classname="REAPP_LeaseAgreementTriggerHandlerTest" time="0.00">
+            <failure message="Methods defined as TestMethod do not support Web service callouts"></failure>
+        </testcase>
+        <testcase name="testLeaseAgreementWithoutPropertyOrTenant" classname="REAPP_LeaseAgreementTriggerHandlerTest" time="0.00">
+            <failure message="Methods defined as TestMethod do not support Web service callouts"></failure>
+        </testcase>
+        <testcase name="testLeaseAgreementWithoutTenant" classname="REAPP_LeaseAgreementTriggerHandlerTest" time="0.00">
+            <failure message="Methods defined as TestMethod do not support Web service callouts"></failure>
+        </testcase>
+        <testcase name="testMixedLeaseAgreementScenario" classname="REAPP_LeaseAgreementTriggerHandlerTest" time="0.00">
+            <failure message="Methods defined as TestMethod do not support Web service callouts"></failure>
+        </testcase>
+        <testcase name="testSingleLeaseAgreementTaskCreation" classname="REAPP_LeaseAgreementTriggerHandlerTest" time="0.00">
+            <failure message="Methods defined as TestMethod do not support Web service callouts"></failure>
+        </testcase>
+    </testsuite>
+</testsuites>

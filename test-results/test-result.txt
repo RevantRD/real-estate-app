@@ -1,0 +1,46 @@
+
+
+=== Test Results
+TEST NAME                                                                         OUTCOME  MESSAGE                                                            RUNTIME (MS)
+────────────────────────────────────────────────────────────────────────────────  ───────  ─────────────────────────────────────────────────────────────────  ────────────
+REAPP_LeaseAgreementTriggerHandlerTest.testBulkLeaseAgreementTaskCreation         Fail     Methods defined as TestMethod do not support Web service callouts              
+REAPP_LeaseAgreementTriggerHandlerTest.testLeaseAgreementWithoutProperty          Fail     Methods defined as TestMethod do not support Web service callouts              
+REAPP_LeaseAgreementTriggerHandlerTest.testLeaseAgreementWithoutPropertyOrTenant  Fail     Methods defined as TestMethod do not support Web service callouts              
+REAPP_LeaseAgreementTriggerHandlerTest.testLeaseAgreementWithoutTenant            Fail     Methods defined as TestMethod do not support Web service callouts              
+REAPP_LeaseAgreementTriggerHandlerTest.testMixedLeaseAgreementScenario            Fail     Methods defined as TestMethod do not support Web service callouts              
+REAPP_LeaseAgreementTriggerHandlerTest.testSingleLeaseAgreementTaskCreation       Fail     Methods defined as TestMethod do not support Web service callouts              
+
+
+=== Apex Code Coverage by Class
+CLASSES                             PERCENT  UNCOVERED LINES  
+──────────────────────────────────  ───────  ─────────────────
+REAPP_PropertyController            0%                        
+REAPP_OpenStreetGeoService          0%                        
+REAPP_PropertyTrigger               0%                        
+REAPP_GeocodeQueueable              0%                        
+REAPP_PropertyTriggerHandler        0%                        
+REAPP_LeaseAgreementTriggerHandler  0%       13,14,22,24,27...
+REAPP_LeaseAgreementTrigger         0%       7,8              
+
+
+=== Test Setup Time by Test Class for Run 707g500000PjWR3
+TEST SETUP METHOD NAME                                SETUP TIME
+────────────────────────────────────────────────────  ──────────
+REAPP_LeaseAgreementTriggerHandlerTest.setupTestData  547       
+
+
+=== Test Summary
+NAME                 VALUE                 
+───────────────────  ──────────────────────
+Outcome              Failed                
+Tests Ran            7                     
+Pass Rate            0%                    
+Fail Rate            100%                  
+Skip Rate            0%                    
+Test Run Id          707g500000PjWR3       
+Test Setup Time      547 ms                
+Test Execution Time  0 ms                  
+Test Total Time      547 ms                
+Org Id               00Dg500000AvexREAR    
+Username             revantrevant16@rea.com
+Org Wide Coverage    0%                    
