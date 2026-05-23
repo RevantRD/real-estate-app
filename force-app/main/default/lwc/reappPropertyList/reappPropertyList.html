@@ -1,0 +1,74 @@
+<template>
+
+    <lightning-card title="Properties">
+
+        <div class="slds-p-around_medium">
+
+            <div class="slds-grid slds-gutters">
+
+                <div class="slds-col">
+                    <lightning-combobox
+                        label="Status"
+                        value={statusFilter}
+                        options={statusOptions}
+                        onchange={handleStatusChange}>
+                    </lightning-combobox>
+                </div>
+
+                <div class="slds-col">
+                    <lightning-combobox
+                        label="Furnishing"
+                        value={furnishingFilter}
+                        options={furnishingOptions}
+                        onchange={handleFurnishingChange}>
+                    </lightning-combobox>
+                </div>
+
+                <div class="slds-col">
+                    <lightning-input
+                        type="number"
+                        label="Max Price"
+                        value={maxPrice}
+                        onchange={handlePriceChange}>
+                    </lightning-input>
+                </div>
+
+                <div class="slds-col">
+                    <lightning-input
+                        type="number"
+                        label="Distance (KM)"
+                        value={distanceKm}
+                        onchange={handleDistanceChange}>
+                    </lightning-input>
+                </div>
+
+            </div>
+
+        </div>
+
+        <lightning-datatable
+            key-field="Id"
+            data={properties}
+            columns={columns}>
+        </lightning-datatable>
+
+        <div class="slds-p-around_medium slds-align_absolute-center">
+
+            <lightning-button
+                label="Previous"
+                onclick={handlePrevious}
+                disabled={disablePrevious}>
+            </lightning-button>
+
+            <lightning-button
+                label="Next"
+                onclick={handleNext}
+                disabled={disableNext}
+                class="slds-m-left_small">
+            </lightning-button>
+
+        </div>
+
+    </lightning-card>
+
+</template>

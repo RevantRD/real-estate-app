@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <Package xmlns="http://soap.sforce.com/2006/04/metadata">
 	<types>
+		<members>REAPP_PropertyController</members>
+		<name>ApexClass</name>
+	</types>
+	<types>
 		<members>Real_Estate_Property_Management_System</members>
 		<name>CustomApplication</name>
 	</types>
@@ -19,6 +23,10 @@
 		<members>Tenant__c</members>
 		<members>Vendor__c</members>
 		<name>CustomTab</name>
+	</types>
+	<types>
+		<members>reappPropertyList</members>
+		<name>LightningComponentBundle</name>
 	</types>
 	<version>66.0</version>
 </Package>
