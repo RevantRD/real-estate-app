@@ -12,6 +12,7 @@
     <isOmniPinnedViewEnabled>false</isOmniPinnedViewEnabled>
     <label>Real Estate Property Management System</label>
     <navType>Standard</navType>
+    <tabs>Property_Management</tabs>
     <tabs>Property__c</tabs>
     <tabs>Tenant__c</tabs>
     <tabs>Lease_Agreement__c</tabs>

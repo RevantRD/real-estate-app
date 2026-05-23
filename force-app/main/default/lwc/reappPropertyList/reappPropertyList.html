@@ -45,7 +45,11 @@
             </div>
 
         </div>
-
+<lightning-button
+    label="New Property"
+    variant="brand"
+    onclick={openModal}>
+</lightning-button>
         <lightning-datatable
             key-field="Id"
             data={properties}
@@ -68,7 +72,189 @@
             </lightning-button>
 
         </div>
+<template if:true={showModal}>
 
+<section role="dialog" tabindex="-1" class="slds-modal slds-fade-in-open">
+
+    <div class="slds-modal__container">
+
+        <!-- HEADER -->
+        <header class="slds-modal__header">
+
+            <lightning-button-icon
+                icon-name="utility:close"
+                alternative-text="Close"
+                onclick={closeModal}
+                class="slds-modal__close">
+            </lightning-button-icon>
+
+            <h2 class="slds-text-heading_medium">
+                New Property
+            </h2>
+
+        </header>
+
+        <!-- BODY -->
+    <div class="slds-modal__content slds-p-around_medium">
+
+    <div class="slds-grid slds-wrap slds-gutters">
+
+        <!-- LEFT COLUMN -->
+        <div class="slds-col slds-size_1-of-2">
+
+            <lightning-input label="Property Name"
+                value={property.Name}
+                data-field="Name"
+                onchange={handleChange}>
+            </lightning-input>
+
+            <lightning-input label="Address"
+                value={property.Address__c}
+                required
+                data-field="Address__c"
+                onchange={handleChange}>
+            </lightning-input>
+
+            <lightning-input label="City"
+            required
+                value={property.City__c}
+                data-field="City__c"
+                onchange={handleChange}>
+            </lightning-input>
+
+            <lightning-input label="State"
+            required
+                value={property.State__c}
+                data-field="State__c"
+                onchange={handleChange}>
+            </lightning-input>
+
+            <lightning-input label="Postal Code"
+            required
+                value={property.Postal_Code__c}
+                data-field="Postal_Code__c"
+                onchange={handleChange}>
+            </lightning-input>
+
+        </div>
+
+        <!-- RIGHT COLUMN -->
+        <div class="slds-col slds-size_1-of-2">
+
+            <!-- COUNTRY -->
+            <lightning-input label="Country"
+            required
+                value={property.Country__c}
+                data-field="Country__c"
+                onchange={handleChange}>
+            </lightning-input>
+
+            <!-- TYPE PICKLIST -->
+            <lightning-combobox
+                label="Type"
+                required
+                value={property.Type__c}
+                data-field="Type__c"
+                options={typeOptions}
+                onchange={handleChange}>
+            </lightning-combobox>
+
+            <!-- FURNISHING PICKLIST -->
+            <lightning-combobox
+                label="Furnishing Status"
+                value={property.Furnishing_Status__c}
+                data-field="Furnishing_Status__c"
+                options={furnishingOptionsModal}
+                onchange={handleChange}>
+            </lightning-combobox>
+
+            <!-- STATUS PICKLIST -->
+            <lightning-combobox
+                label="Status"
+                required
+                value={property.Status__c}
+                data-field="Status__c"
+                options={statusOptionsModal}
+                onchange={handleChange}>
+            </lightning-combobox>
+
+            <!-- RENT -->
+            <lightning-input type="number"
+                label="Rent"
+                required
+                value={property.Rent__c}
+                data-field="Rent__c"
+                onchange={handleChange}>
+            </lightning-input>
+
+        </div>
+
+        <!-- FULL WIDTH DESCRIPTION -->
+        <div class="slds-col slds-size_1-of-1 slds-m-top_small">
+
+            <lightning-textarea
+                label="Description"
+                required
+                value={property.Description__c}
+                data-field="Description__c"
+                onchange={handleChange}>
+            </lightning-textarea>
+
+        </div>
+
+        <!-- IMAGE UPLOAD -->
+        <div class="slds-col slds-size_1-of-1 slds-m-top_medium">
+
+            <lightning-file-upload
+                label="Upload Property Image (Required)"
+                accept=".png,.jpg,.jpeg"
+                onuploadfinished={handleUploadFinished}
+                multiple>
+            </lightning-file-upload>
+
+            <template if:true={imageUploaded}>
+                <p class="slds-text-color_success slds-m-top_small">
+                    ✔ Image uploaded successfully
+                </p>
+            </template>
+
+        </div>
+
+        <!-- CREATE BUTTON -->
+        <div class="slds-col slds-size_1-of-1 slds-m-top_medium">
+
+            <lightning-button
+                label="Create Property"
+                variant="brand"
+                onclick={handleCreate}>
+            </lightning-button>
+
+        </div>
+
+    </div>
+
+</div>
+
+        <!-- FOOTER -->
+        <footer class="slds-modal__footer">
+
+            <lightning-button
+                label="Cancel"
+                onclick={closeModal}>
+            </lightning-button>
+
+        </footer>
+
+    </div>
+
+</section>
+
+<div class="slds-backdrop slds-backdrop_open"></div>
+
+</template>
+
+
+   
     </lightning-card>
 
 </template>
