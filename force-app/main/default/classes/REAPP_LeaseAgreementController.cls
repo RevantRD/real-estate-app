@@ -59,8 +59,16 @@ public static void sendLeaseAgreementEmail(Id agreementId, String pdfBase64) {
     );
     mail.setToAddresses(new String[] { agreement.Tenant__r.Email__c });
     mail.setSubject('Lease Agreement - ' + agreement.Name);
-    mail.setPlainTextBody('Dear ' + agreement.Tenant__r.Name + ',\n\nPlease find attached your Lease Agreement.\n\nRegards,\nProperty Management Team');
+    // Build record link
+    String recordLink = System.URL.getOrgDomainUrl().toExternalForm() + '/' + agreement.Id;
+    String htmlBody =
+        '<p>Dear ' + agreement.Tenant__r.Name + ',</p>' +
+        '<p>Please find attached your Lease Agreement.</p>' +
+        '<p>You can also view it directly in Salesforce here: ' +
+        '<a href="' + recordLink + '">' + agreement.Name + '</a></p>' +
+        '<p>Regards,<br/>Real Estate Property Management Team</p>';
 
+    mail.setHtmlBody(htmlBody);
     Messaging.EmailFileAttachment attachment = new Messaging.EmailFileAttachment();
     attachment.setFileName('LeaseAgreement_' + agreement.Name + '.pdf');
     attachment.setBody(EncodingUtil.base64Decode(pdfBase64));

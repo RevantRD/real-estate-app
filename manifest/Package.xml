@@ -5,6 +5,7 @@
 		<members>REAPP_LeaseAgreementController</members>
 		<members>REAPP_LeaseAgreementTriggerHandler</members>
 		<members>REAPP_LeaseAgreementTriggerHandlerTest</members>
+		<members>REAPP_MaintenanceRequestHandler</members>
 		<members>REAPP_OpenStreetGeoService</members>
 		<members>REAPP_PropertyController</members>
 		<members>REAPP_PropertyTriggerHandler</members>
@@ -40,8 +41,13 @@
 		<name>CustomTab</name>
 	</types>
 	<types>
+		<members>REAPPDashboard/zGmsmDgQfvJtSsABPNCNfQhMWkNgUO</members>
+		<name>Dashboard</name>
+	</types>
+	<types>
 		<members>Lease_Agreement_Record_Page</members>
 		<members>Property</members>
+		<members>Real_Estate_Property_Management_System_UtilityBar</members>
 		<name>FlexiPage</name>
 	</types>
 	<types>
@@ -57,6 +63,11 @@
 		<members>reappPropertyList</members>
 		<members>reappPropertyMapp</members>
 		<name>LightningComponentBundle</name>
+	</types>
+	<types>
+		<members>REAPPReports/Expiring_Lease_Agreements_Report_lQ9</members>
+		<members>REAPPReports/Maintenance_Requests_Status_Report_jxM</members>
+		<name>Report</name>
 	</types>
 	<types>
 		<members>*</members>
