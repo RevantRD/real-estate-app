@@ -51,6 +51,10 @@
 		<name>FlexiPage</name>
 	</types>
 	<types>
+		<members>*</members>
+		<name>FlowDefinition</name>
+	</types>
+	<types>
 		<members>Lease_Agreement__c-Lease Agreement Layout</members>
 		<members>Maintenance_Request__c-Maintenance Request Layout</members>
 		<members>Property__c-Property Layout</members>
