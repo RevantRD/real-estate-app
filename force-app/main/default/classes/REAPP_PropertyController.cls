@@ -1,7 +1,6 @@
 public with sharing class REAPP_PropertyController {
 
     public class PropertyResponse {
-
         @AuraEnabled public List<Property__c> properties;
         @AuraEnabled public Integer totalRecords;
 
@@ -22,113 +21,59 @@ public with sharing class REAPP_PropertyController {
         Decimal userLongitude,
         Decimal distanceKm
     ) {
-
         Integer offsetValue = (pageNumber - 1) * pageSize;
 
         String baseQuery = ' FROM Property__c WHERE Id != null';
 
-        // -------------------------
-        // STATUS FILTER
-        // -------------------------
         if (String.isNotBlank(statusFilter)) {
-            baseQuery += ' AND Status__c = \'' +
-                String.escapeSingleQuotes(statusFilter) + '\'';
+            baseQuery += ' AND Status__c = \'' + String.escapeSingleQuotes(statusFilter) + '\'';
         }
-
-        // -------------------------
-        // FURNISHING FILTER
-        // -------------------------
         if (String.isNotBlank(furnishingFilter)) {
-            baseQuery += ' AND Furnishing_Status__c = \'' +
-                String.escapeSingleQuotes(furnishingFilter) + '\'';
+            baseQuery += ' AND Furnishing_Status__c = \'' + String.escapeSingleQuotes(furnishingFilter) + '\'';
         }
-
-        // -------------------------
-        // PRICE FILTER
-        // -------------------------
         if (maxPrice != null) {
             baseQuery += ' AND Rent__c <= ' + maxPrice;
         }
-
-        // -------------------------
-        // DISTANCE FILTER
-        // -------------------------
-        // NOTE: Requires Location__c = Geolocation field
-        if (userLatitude != null &&
-            userLongitude != null &&
-            distanceKm != null) {
-
+        if (userLatitude != null && userLongitude != null && distanceKm != null) {
             baseQuery += ' AND DISTANCE(Location__c, GEOLOCATION(' +
-                userLatitude + ',' +
-                userLongitude +
-                '), \'km\') < ' + distanceKm;
+                userLatitude + ',' + userLongitude + '), \'km\') < ' + distanceKm;
         }
 
-        // -------------------------
-        // COUNT QUERY
-        // -------------------------
-        Integer totalRecords = Database.countQuery(
-            'SELECT COUNT() ' + baseQuery
-        );
+        Integer totalRecords = Database.countQuery('SELECT COUNT() ' + baseQuery);
 
-        // -------------------------
-        // MAIN QUERY
-        // -------------------------
         String query =
             'SELECT Id, Name, City__c, State__c, Rent__c, Status__c, Furnishing_Status__c'
-            + baseQuery +
-            ' ORDER BY CreatedDate DESC' +
-            ' LIMIT ' + pageSize +
-            ' OFFSET ' + offsetValue;
+            + baseQuery
+            + ' ORDER BY CreatedDate DESC'
+            + ' LIMIT ' + pageSize
+            + ' OFFSET ' + offsetValue;
 
-        List<Property__c> properties = Database.query(query);
-
-        return new PropertyResponse(properties, totalRecords);
+        return new PropertyResponse(Database.query(query), totalRecords);
     }
 
-    // =====================================================
+    // =========================================================
     // CREATE PROPERTY
-    // =====================================================
-
+    // Geocoding is intentionally left to the trigger + batch.
+    // Doing a callout here would violate Salesforce's rule:
+    // "cannot make a callout after a DML operation in the same transaction."
+    // =========================================================
     @AuraEnabled
     public static Id createPropertyWithImage(Property__c propertyRecord, List<String> documentIds) {
 
-    // 1. Build full address
-    String fullAddress =
-        propertyRecord.Address__c + ' ' +
-        propertyRecord.City__c + ' ' +
-        propertyRecord.State__c + ' ' +
-        propertyRecord.Postal_Code__c + ' ' +
-        propertyRecord.Country__c;
+        insert propertyRecord;
 
-    // 2. Geocode
-    REAPP_OpenStreetGeoService.GeoResult geo =
-        REAPP_OpenStreetGeoService.geocode(fullAddress);
-
-    // 3. Set location
-    if (geo != null) {
-        propertyRecord.Location__Latitude__s = geo.lat;
-        propertyRecord.Location__Longitude__s = geo.lng;
-    }
-
-    // 4. Insert property
-    insert propertyRecord;
-
-    // 5. Attach files (existing logic assumed)
-    if (documentIds != null && !documentIds.isEmpty()) {
-        List<ContentDocumentLink> links = new List<ContentDocumentLink>();
-
-        for (String docId : documentIds) {
-            links.add(new ContentDocumentLink(
-                ContentDocumentId = docId,
-                LinkedEntityId = propertyRecord.Id,
-                ShareType = 'V'
-            ));
+        if (documentIds != null && !documentIds.isEmpty()) {
+            List<ContentDocumentLink> links = new List<ContentDocumentLink>();
+            for (String docId : documentIds) {
+                links.add(new ContentDocumentLink(
+                    ContentDocumentId = docId,
+                    LinkedEntityId    = propertyRecord.Id,
+                    ShareType         = 'V'
+                ));
+            }
+            insert links;
         }
 
-        insert links;
+        return propertyRecord.Id;
     }
-
-    return propertyRecord.Id;
-}
 }

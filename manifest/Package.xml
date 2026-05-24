@@ -1,14 +1,21 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <Package xmlns="http://soap.sforce.com/2006/04/metadata">
 	<types>
+		<members>REAPP_GeocodeBatch</members>
+		<members>REAPP_GeocodeBatchTest</members>
 		<members>REAPP_GeocodeQueueable</members>
+		<members>REAPP_GeocodeQueueableTest</members>
 		<members>REAPP_LeaseAgreementController</members>
 		<members>REAPP_LeaseAgreementTriggerHandler</members>
 		<members>REAPP_LeaseAgreementTriggerHandlerTest</members>
 		<members>REAPP_MaintenanceRequestHandler</members>
+		<members>REAPP_MockGeocodeCallout</members>
 		<members>REAPP_OpenStreetGeoService</members>
+		<members>REAPP_OpenStreetGeoServiceTest</members>
 		<members>REAPP_PropertyController</members>
+		<members>REAPP_PropertyControllerTest</members>
 		<members>REAPP_PropertyTriggerHandler</members>
+		<members>REAPP_PropertyTriggerHandlerTest</members>
 		<name>ApexClass</name>
 	</types>
 	<types>
@@ -67,6 +74,10 @@
 		<members>reappPropertyList</members>
 		<members>reappPropertyMapp</members>
 		<name>LightningComponentBundle</name>
+	</types>
+	<types>
+		<members>OpenStreetMap</members>
+		<name>RemoteSiteSetting</name>
 	</types>
 	<types>
 		<members>REAPPReports/Expiring_Lease_Agreements_Report_lQ9</members>

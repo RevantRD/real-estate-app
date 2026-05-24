@@ -19,7 +19,6 @@
         <field>Lease_Agreement__c.End_Date__c</field>
     </columns>
     <columns>
-        <aggregateTypes>Sum</aggregateTypes>
         <field>Lease_Agreement__c.Agreed_Monthly_Rent__c</field>
     </columns>
     <columns>
