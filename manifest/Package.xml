@@ -16,6 +16,8 @@
 		<members>REAPP_PropertyControllerTest</members>
 		<members>REAPP_PropertyTriggerHandler</members>
 		<members>REAPP_PropertyTriggerHandlerTest</members>
+		<members>REAPP_MaintenanceRequestHandlerTest</members>
+		<members>REAPP_LeaseAgreementControllerTest</members>
 		<name>ApexClass</name>
 	</types>
 	<types>
