@@ -86,7 +86,11 @@ export default class LeaseAgreementPdf extends LightningElement {
     async handleDownload() {
         try {
             const { doc, leaseData } = await this.generatePdf();
-            doc.save(`LeaseAgreement_${leaseData.propertyName}.pdf`);
+            // Create a proper filename with fallback
+            const propertyName = leaseData.propertyName || leaseData.Property__r?.Name || 'Property';
+            const agreementName = leaseData.Name || 'Agreement';
+            const fileName = `LeaseAgreement_${agreementName}_${propertyName}`.replace(/[^a-zA-Z0-9_-]/g, '_');
+            doc.save(`${fileName}.pdf`);
             this.showToast('Success', 'Lease Agreement PDF has been generated and downloaded.', 'success');
         } catch (error) {
             console.error("Error generating PDF:", error);

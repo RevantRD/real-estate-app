@@ -5,11 +5,23 @@ import createPropertyWithImage from '@salesforce/apex/REAPP_PropertyController.c
 import { ShowToastEvent } from 'lightning/platformShowToastEvent';
 
 const columns = [
-    { label: 'Property Name', fieldName: 'Name' },
+    { 
+        label: 'Property Name', 
+        fieldName: 'propertyUrl', 
+        type: 'url',
+        typeAttributes: {
+            label: { fieldName: 'Name' },
+            target: '_self'
+        }
+    },
+    { label: 'Availability Status', fieldName: 'Status__c' },
+    { label: 'Furnishing Status', fieldName: 'Furnishing_Status__c' },
+    { label: 'Property Type', fieldName: 'Type__c' },
+    { label: 'Rent', fieldName: 'Rent__c', type: 'currency' },
     { label: 'City', fieldName: 'City__c' },
     { label: 'State', fieldName: 'State__c' },
-    { label: 'Rent', fieldName: 'Rent__c', type: 'currency' },
-    { label: 'Status', fieldName: 'Status__c' }
+    { label: 'Country', fieldName: 'Country__c' },
+    { label: 'Postal Code', fieldName: 'Postal_Code__c' }
 ];
 
 export default class ReappPropertyList extends NavigationMixin(LightningElement) {
@@ -62,17 +74,31 @@ export default class ReappPropertyList extends NavigationMixin(LightningElement)
     // PICKLIST OPTIONS
     // =========================
     statusOptionsModal = [
+        { label: 'Select an Option', value: '' },
+        { label: 'Available', value: 'Available' },
+        { label: 'Occupied', value: 'Occupied' }
+    ];
+    statusOptions = [
+        { label: 'All', value: '' },
         { label: 'Available', value: 'Available' },
         { label: 'Occupied', value: 'Occupied' }
     ];
 
     furnishingOptionsModal = [
+        { label: 'Select an Option', value: '' },
+        { label: 'Furnished', value: 'Furnished' },
+        { label: 'Semi-Furnished', value: 'Semi-Furnished' },
+        { label: 'Unfurnished', value: 'Unfurnished' }
+    ];
+    furnishingOptions = [
+        { label: 'All', value: '' },
         { label: 'Furnished', value: 'Furnished' },
         { label: 'Semi-Furnished', value: 'Semi-Furnished' },
         { label: 'Unfurnished', value: 'Unfurnished' }
     ];
 
     typeOptions = [
+        { label: 'Select an Option', value: '' },
         { label: 'Residential', value: 'Residential' },
         { label: 'Commercial', value: 'Commercial' }
     ];
@@ -120,7 +146,15 @@ export default class ReappPropertyList extends NavigationMixin(LightningElement)
         .then(result => {
 
             if (result) {
-                this.properties = [...(result.properties || [])];
+                // Add propertyUrl to each property record for navigation
+                const propertiesWithUrl = (result.properties || []).map(property => {
+                    return {
+                        ...property,
+                        propertyUrl: `/lightning/r/Property__c/${property.Id}/view`
+                    };
+                });
+                
+                this.properties = [...propertiesWithUrl];
                 this.totalRecords = result.totalRecords || 0;
             }
 
@@ -140,6 +174,15 @@ export default class ReappPropertyList extends NavigationMixin(LightningElement)
 
     get disableNext() {
         return this.pageNumber * this.pageSize >= this.totalRecords;
+    }
+
+    get startRecord() {
+        return this.totalRecords === 0 ? 0 : (this.pageNumber - 1) * this.pageSize + 1;
+    }
+
+    get endRecord() {
+        const end = this.pageNumber * this.pageSize;
+        return end > this.totalRecords ? this.totalRecords : end;
     }
 
     handleNext() {
@@ -172,13 +215,25 @@ export default class ReappPropertyList extends NavigationMixin(LightningElement)
     }
 
     handlePriceChange(event) {
-        this.maxPrice = event.detail.value || null;
+        const value = event.detail.value;
+        if (value && parseFloat(value) < 0) {
+            this.showToast('Error', 'Max Price cannot be negative', 'error');
+            this.maxPrice = null;
+            return;
+        }
+        this.maxPrice = value || null;
         this.pageNumber = 1;
         this.loadProperties();
     }
 
     handleDistanceChange(event) {
-        this.distanceKm = event.detail.value || null;
+        const value = event.detail.value;
+        if (value && parseFloat(value) < 0) {
+            this.showToast('Error', 'Distance cannot be negative', 'error');
+            this.distanceKm = null;
+            return;
+        }
+        this.distanceKm = value || null;
         this.pageNumber = 1;
         this.loadProperties();
     }
@@ -200,6 +255,18 @@ export default class ReappPropertyList extends NavigationMixin(LightningElement)
         this.property = {};
         this.uploadedFileIds = [];
         this.imageUploaded = false;
+    }
+
+    handleBackdropClick(event) {
+        // Close modal if clicking on the backdrop (not the modal container)
+        if (event.target.classList.contains('slds-modal')) {
+            this.closeModal();
+        }
+    }
+
+    handleModalClick(event) {
+        // Stop propagation to prevent closing when clicking inside modal
+        event.stopPropagation();
     }
 
     // =========================

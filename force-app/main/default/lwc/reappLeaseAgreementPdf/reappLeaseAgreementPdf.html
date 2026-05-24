@@ -1,12 +1,19 @@
 <template>
-    <lightning-button 
-        label="Download PDF" 
-        onclick={handleDownload} 
-        variant="brand">
-    </lightning-button>
-    <lightning-button 
-        label="Send Email to Tenant" 
-        onclick={handleSend} 
-        variant="brand">
-    </lightning-button>
+    <div class="slds-p-around_small">
+        <div class="slds-button-group" role="group">
+            <lightning-button 
+                label="Download PDF"
+                icon-name="utility:download"
+                onclick={handleDownload} 
+                variant="brand"
+                class="slds-m-right_x-small">
+            </lightning-button>
+            <lightning-button 
+                label="Send Email to Tenant"
+                icon-name="utility:email"
+                onclick={handleSend} 
+                variant="neutral">
+            </lightning-button>
+        </div>
+    </div>
 </template>

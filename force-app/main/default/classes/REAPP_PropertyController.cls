@@ -42,7 +42,7 @@ public with sharing class REAPP_PropertyController {
         Integer totalRecords = Database.countQuery('SELECT COUNT() ' + baseQuery);
 
         String query =
-            'SELECT Id, Name, City__c, State__c, Rent__c, Status__c, Furnishing_Status__c'
+            'SELECT Id, Name, City__c, State__c, Rent__c, Status__c, Furnishing_Status__c, Type__c, Country__c, Postal_Code__c'
             + baseQuery
             + ' ORDER BY CreatedDate DESC'
             + ' LIMIT ' + pageSize

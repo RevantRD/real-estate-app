@@ -8,7 +8,7 @@
 
                 <div class="slds-col">
                     <lightning-combobox
-                        label="Status"
+                        label="Availability Status"
                         value={statusFilter}
                         options={statusOptions}
                         onchange={handleStatusChange}>
@@ -17,7 +17,7 @@
 
                 <div class="slds-col">
                     <lightning-combobox
-                        label="Furnishing"
+                        label="Furnishing Status"
                         value={furnishingFilter}
                         options={furnishingOptions}
                         onchange={handleFurnishingChange}>
@@ -29,6 +29,8 @@
                         type="number"
                         label="Max Price"
                         value={maxPrice}
+                        min="0"
+                        step="0.01"
                         onchange={handlePriceChange}>
                     </lightning-input>
                 </div>
@@ -38,6 +40,8 @@
                         type="number"
                         label="Distance (KM)"
                         value={distanceKm}
+                        min="0"
+                        step="0.1"
                         onchange={handleDistanceChange}>
                     </lightning-input>
                 </div>
@@ -45,38 +49,50 @@
             </div>
 
         </div>
-<lightning-button
-    label="New Property"
-    variant="brand"
-    onclick={openModal}>
-</lightning-button>
+
+        <div class="slds-p-around_medium slds-text-align_right">
+            <lightning-button
+                label="New Property"
+                variant="brand"
+                onclick={openModal}>
+            </lightning-button>
+        </div>
+
         <lightning-datatable
             key-field="Id"
             data={properties}
             columns={columns}>
         </lightning-datatable>
 
-        <div class="slds-p-around_medium slds-align_absolute-center">
+        <div class="slds-p-around_medium slds-grid slds-grid_align-spread slds-grid_vertical-align-center">
+            
+            <div class="slds-col">
+                <p class="slds-text-body_regular">
+                    Showing {startRecord} - {endRecord} of {totalRecords} records | Page {pageNumber}
+                </p>
+            </div>
 
-            <lightning-button
-                label="Previous"
-                onclick={handlePrevious}
-                disabled={disablePrevious}>
-            </lightning-button>
+            <div class="slds-col slds-no-flex">
+                <lightning-button
+                    label="Previous"
+                    onclick={handlePrevious}
+                    disabled={disablePrevious}>
+                </lightning-button>
 
-            <lightning-button
-                label="Next"
-                onclick={handleNext}
-                disabled={disableNext}
-                class="slds-m-left_small">
-            </lightning-button>
+                <lightning-button
+                    label="Next"
+                    onclick={handleNext}
+                    disabled={disableNext}
+                    class="slds-m-left_small">
+                </lightning-button>
+            </div>
 
         </div>
 <template if:true={showModal}>
 
-<section role="dialog" tabindex="-1" class="slds-modal slds-fade-in-open">
+<section role="dialog" tabindex="-1" class="slds-modal slds-fade-in-open" onclick={handleBackdropClick}>
 
-    <div class="slds-modal__container">
+    <div class="slds-modal__container" onclick={handleModalClick}>
 
         <!-- HEADER -->
         <header class="slds-modal__header">
@@ -104,6 +120,7 @@
 
             <lightning-input label="Property Name"
                 value={property.Name}
+                required
                 data-field="Name"
                 onchange={handleChange}>
             </lightning-input>
@@ -170,7 +187,7 @@
 
             <!-- STATUS PICKLIST -->
             <lightning-combobox
-                label="Status"
+                label="Availability Status"
                 required
                 value={property.Status__c}
                 data-field="Status__c"
@@ -206,7 +223,8 @@
         <div class="slds-col slds-size_1-of-1 slds-m-top_medium">
 
             <lightning-file-upload
-                label="Upload Property Image (Required)"
+                label="Upload Property Image"
+                required
                 accept=".png,.jpg,.jpeg"
                 onuploadfinished={handleUploadFinished}
                 multiple>
@@ -220,36 +238,32 @@
 
         </div>
 
-        <!-- CREATE BUTTON -->
-        <div class="slds-col slds-size_1-of-1 slds-m-top_medium">
-
-            <lightning-button
-                label="Create Property"
-                variant="brand"
-                onclick={handleCreate}>
-            </lightning-button>
-
-        </div>
-
     </div>
 
 </div>
 
         <!-- FOOTER -->
         <footer class="slds-modal__footer">
+            <div class="slds-text-align_right">
+                <lightning-button
+                    label="Create Property"
+                    variant="brand"
+                    onclick={handleCreate}>
+                </lightning-button>
 
-            <lightning-button
-                label="Cancel"
-                onclick={closeModal}>
-            </lightning-button>
-
+                <lightning-button
+                    label="Cancel"
+                    onclick={closeModal}
+                    class="slds-m-left_small">
+                </lightning-button>
+            </div>
         </footer>
 
     </div>
 
 </section>
 
-<div class="slds-backdrop slds-backdrop_open"></div>
+<div class="slds-backdrop slds-backdrop_open" onclick={closeModal}></div>
 
 </template>
 
