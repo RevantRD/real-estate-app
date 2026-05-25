@@ -6,9 +6,11 @@
 		<members>REAPP_GeocodeQueueable</members>
 		<members>REAPP_GeocodeQueueableTest</members>
 		<members>REAPP_LeaseAgreementController</members>
+		<members>REAPP_LeaseAgreementControllerTest</members>
 		<members>REAPP_LeaseAgreementTriggerHandler</members>
 		<members>REAPP_LeaseAgreementTriggerHandlerTest</members>
 		<members>REAPP_MaintenanceRequestHandler</members>
+		<members>REAPP_MaintenanceRequestHandlerTest</members>
 		<members>REAPP_OpenStreetGeoService</members>
 		<members>REAPP_OpenStreetGeoServiceTest</members>
 		<members>REAPP_PropertyController</members>
@@ -24,6 +26,34 @@
 	<types>
 		<members>Real_Estate_Property_Management_System</members>
 		<name>CustomApplication</name>
+	</types>
+	<types>
+		<members>Lease_Agreement__c.Agreed_Monthly_Rent__c</members>
+		<members>Lease_Agreement__c.End_Date__c</members>
+		<members>Lease_Agreement__c.Property__c</members>
+		<members>Lease_Agreement__c.Start_Date__c</members>
+		<members>Lease_Agreement__c.Tenant__c</members>
+		<members>Lease_Agreement__c.Terms__c</members>
+		<members>Maintenance_Request__c.Description__c</members>
+		<members>Maintenance_Request__c.Property__c</members>
+		<members>Maintenance_Request__c.Status__c</members>
+		<members>Maintenance_Request__c.Vendor__c</members>
+		<members>Property__c.Address__c</members>
+		<members>Property__c.City__c</members>
+		<members>Property__c.Country__c</members>
+		<members>Property__c.Description__c</members>
+		<members>Property__c.Furnishing_Status__c</members>
+		<members>Property__c.Location__c</members>
+		<members>Property__c.Postal_Code__c</members>
+		<members>Property__c.Rent__c</members>
+		<members>Property__c.State__c</members>
+		<members>Property__c.Status__c</members>
+		<members>Property__c.Type__c</members>
+		<members>Tenant__c.Email__c</members>
+		<members>Tenant__c.Phone_Number__c</members>
+		<members>Vendor__c.Email__c</members>
+		<members>Vendor__c.Phone_Number__c</members>
+		<name>CustomField</name>
 	</types>
 	<types>
 		<members>Org_Wide_Address_Label</members>
@@ -53,8 +83,15 @@
 	<types>
 		<members>Lease_Agreement_Record_Page</members>
 		<members>Property</members>
+		<members>Property_Management</members>
+		<members>REAPP_Home</members>
 		<members>Real_Estate_Property_Management_System_UtilityBar</members>
+		<members>Tenant_Record_Page</members>
 		<name>FlexiPage</name>
+	</types>
+	<types>
+		<members>*</members>
+		<name>Flow</name>
 	</types>
 	<types>
 		<members>*</members>
@@ -73,6 +110,14 @@
 		<members>reappPropertyList</members>
 		<members>reappPropertyMapp</members>
 		<name>LightningComponentBundle</name>
+	</types>
+	<types>
+		<members>Lease_Agreement__c.All</members>
+		<members>Maintenance_Request__c.All</members>
+		<members>Property__c.All</members>
+		<members>Tenant__c.All</members>
+		<members>Vendor__c.All</members>
+		<name>ListView</name>
 	</types>
 	<types>
 		<members>OpenStreetMap</members>
