@@ -67,10 +67,7 @@ public with sharing class REAPP_MaintenanceRequestHandler {
                 }
             }
 
-        } catch (QueryException qe) {
-            System.debug('Error querying vendors: ' + qe.getMessage());
-            throw qe;
-        } catch (Exception e) {
+        }  catch (Exception e) {
             System.debug('Error in assignVendors: ' + e.getMessage());
             throw e;
         }

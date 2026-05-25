@@ -6,7 +6,7 @@
     <columns>Email__c</columns>
     <columns>CREATED_DATE</columns>
     <columns>CREATEDBY_USER</columns>
-    <columns>LAST_ACTIVITY</columns>
+    <columns>LAST_UPDATE</columns>
     <filterScope>Everything</filterScope>
     <label>All Tenants</label>
 </ListView>

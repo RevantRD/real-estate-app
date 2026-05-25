@@ -9,7 +9,6 @@
 		<members>REAPP_LeaseAgreementTriggerHandler</members>
 		<members>REAPP_LeaseAgreementTriggerHandlerTest</members>
 		<members>REAPP_MaintenanceRequestHandler</members>
-		<members>REAPP_MockGeocodeCallout</members>
 		<members>REAPP_OpenStreetGeoService</members>
 		<members>REAPP_OpenStreetGeoServiceTest</members>
 		<members>REAPP_PropertyController</members>
